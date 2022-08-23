@@ -100,7 +100,7 @@ def patient_signup_view(request):
 
 
 
-#-----------for checking user is doctor , patient or admin(by sumit)
+#for checking user is doctor , patient or admin(by sumit)
 def is_admin(user):
     return user.groups.filter(name='ADMIN').exists()
 def is_doctor(user):
@@ -109,7 +109,7 @@ def is_patient(user):
     return user.groups.filter(name='PATIENT').exists()
 
 
-#---------AFTER ENTERING CREDENTIALS WE CHECK WHETHER USERNAME AND PASSWORD IS OF ADMIN,DOCTOR OR PATIENT
+#AFTER ENTERING CREDENTIALS WE CHECK WHETHER USERNAME AND PASSWORD IS OF ADMIN,DOCTOR OR PATIENT
 def afterlogin_view(request):
     if is_admin(request.user):
         return redirect('admin-dashboard')
@@ -129,13 +129,8 @@ def afterlogin_view(request):
 
 
 
-
-
-
-
-#---------------------------------------------------------------------------------
 #------------------------ ADMIN RELATED VIEWS START ------------------------------
-#---------------------------------------------------------------------------------
+
 @login_required(login_url='adminlogin')
 @user_passes_test(is_admin)
 def admin_dashboard_view(request):
@@ -551,18 +546,17 @@ def reject_appointment_view(request,pk):
     appointment=models.Appointment.objects.get(id=pk)
     appointment.delete()
     return redirect('admin-approve-appointment')
-#---------------------------------------------------------------------------------
+
 #------------------------ ADMIN RELATED VIEWS END ------------------------------
-#---------------------------------------------------------------------------------
 
 
 
 
 
 
-#---------------------------------------------------------------------------------
+
 #------------------------ DOCTOR RELATED VIEWS START ------------------------------
-#---------------------------------------------------------------------------------
+
 @login_required(login_url='doctorlogin')
 @user_passes_test(is_doctor)
 def doctor_dashboard_view(request):
@@ -681,18 +675,15 @@ def delete_appointment_view(request,pk):
 
 
 
-#---------------------------------------------------------------------------------
 #------------------------ DOCTOR RELATED VIEWS END ------------------------------
-#---------------------------------------------------------------------------------
 
 
 
 
 
 
-#---------------------------------------------------------------------------------
 #------------------------ PATIENT RELATED VIEWS START ------------------------------
-#---------------------------------------------------------------------------------
+
 @login_required(login_url='patientlogin')
 @user_passes_test(is_patient)
 def patient_dashboard_view(request):
@@ -818,9 +809,9 @@ def patient_discharge_view(request):
 
 
 
-#---------------------------------------------------------------------------------
+
 #------------------------ ABOUT US AND CONTACT US VIEWS START ------------------------------
-#---------------------------------------------------------------------------------
+
 def aboutus_view(request):
     return render(request,'hospital/aboutus.html')
 
@@ -836,13 +827,5 @@ def contactus_view(request):
             return render(request, 'hospital/contactussuccess.html')
     return render(request, 'hospital/contactus.html', {'form':sub})
 
-
-#---------------------------------------------------------------------------------
 #------------------------ ADMIN RELATED VIEWS END ------------------------------
-#---------------------------------------------------------------------------------
 
-
-
-#Developed By : sumit kumar
-#facebook : fb.com/sumit.luv
-#Youtube :youtube.com/lazycoders
